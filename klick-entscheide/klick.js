@@ -4,7 +4,7 @@ var HAND='Virgil, Kalam, "Chalkboard SE", "Comic Sans MS", cursive',LH=1.25,NS='
 var PAL={blau:[165,216,255],gelb:[255,236,153],gruen:[178,242,187],rot:[255,168,168],lila:[208,191,255],grau:[222,226,230]};
 var qs=[].slice.call(root.querySelectorAll('.ke-q')),btn=root.querySelector('.ke-send'),z=root.querySelector('.ke-z'),err=root.querySelector('.ke-err'),sumL=root.querySelector('.ke-sum ol'),sentEl=root.querySelector('.ke-sent'),ueb=0,cp=null;
 var KEY='ke:'+(root.getAttribute('data-titel')||'');
-var copyVersion=0,HINW='Steht deine Auswahl nicht als eigene Nachricht im Chat, hier kopieren und einfügen.';
+var copyVersion=0,HINW='Steht der Text im Eingabefeld unten, mit Enter senden. Fehlt er dort und im Chat, hier kopieren und einfügen.';
 function each(l,f){[].forEach.call(l,f);}
 function freeze(on){each(root.querySelectorAll('.ke-o,.ke-x,.ke-n'),function(e){e.disabled=on;});}
 function changed(){copyVersion++;var out=root.querySelector('.ke-out');if(out&&!out.hidden){out.hidden=true;out.value='';var war=ueb;if(cp)cp.hidden=true;ueb=0;if(sentEl)sentEl.textContent=war?'Auswahl geändert, noch nicht gesendet.':'Auswahl geändert, erneut kopieren.';if(btn)btn.textContent=war?'Entscheide senden':'Auswahl erneut kopieren';}}
