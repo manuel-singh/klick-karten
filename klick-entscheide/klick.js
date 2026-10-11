@@ -2,26 +2,27 @@
 function init(root){
 var HAND='Virgil, Kalam, "Chalkboard SE", "Comic Sans MS", cursive',LH=1.25,NS='http://www.w3.org/2000/svg';
 var PAL={blau:[165,216,255],gelb:[255,236,153],gruen:[178,242,187],rot:[255,168,168],lila:[208,191,255],grau:[222,226,230]};
-var qs=[].slice.call(root.querySelectorAll('.ke-q')),btn=root.querySelector('.ke-send'),z=root.querySelector('.ke-z'),err=root.querySelector('.ke-err'),sumL=root.querySelector('.ke-sum ol'),sentEl=root.querySelector('.ke-sent'),sent=false;
+var qs=[].slice.call(root.querySelectorAll('.ke-q')),btn=root.querySelector('.ke-send'),z=root.querySelector('.ke-z'),err=root.querySelector('.ke-err'),sumL=root.querySelector('.ke-sum ol'),sentEl=root.querySelector('.ke-sent'),ueb=0,cp=null;
 var KEY='ke:'+(root.getAttribute('data-titel')||'');
-var copyVersion=0;
+var copyVersion=0,HINW='Steht deine Auswahl nicht als eigene Nachricht im Chat, hier kopieren und einfügen.';
 function each(l,f){[].forEach.call(l,f);}
 function freeze(on){each(root.querySelectorAll('.ke-o,.ke-x,.ke-n'),function(e){e.disabled=on;});}
-function changed(){copyVersion++;var out=root.querySelector('.ke-out');if(out&&!out.hidden){out.hidden=true;out.value='';if(sentEl)sentEl.textContent='Auswahl geändert, erneut kopieren.';if(btn)btn.textContent='Auswahl erneut kopieren';}}
+function changed(){copyVersion++;var out=root.querySelector('.ke-out');if(out&&!out.hidden){out.hidden=true;out.value='';var war=ueb;if(cp)cp.hidden=true;ueb=0;if(sentEl)sentEl.textContent=war?'Auswahl geändert, noch nicht gesendet.':'Auswahl geändert, erneut kopieren.';if(btn)btn.textContent=war?'Entscheide senden':'Auswahl erneut kopieren';}}
 function sel(q){return [].slice.call(q.querySelectorAll('.ke-o[aria-pressed="true"]'));}
 function say(t){if(err)err.textContent=t;}
 function anders(q){return ((q.querySelector('.ke-x')||{}).value||'').trim();}
 function label(q,o){if(o.hasAttribute('data-anders'))return 'anders: '+(anders(q)||'…');if(o.hasAttribute('data-spaeter'))return 'später';return o.getAttribute('data-k')+' · '+o.getAttribute('data-t');}
 function wahl(q){var s=sel(q);if(!s.length)return '';var rec=s.every(function(o){return o.hasAttribute('data-rec');}),any=q.querySelector('.ke-o[data-rec]');return s.map(function(o){return label(q,o);}).join(' + ')+(rec?'  ·  ★ Empfehlung':(any?'  ·  von dir geändert':''));}
-function store(){try{var d={s:{},x:{},n:(root.querySelector('.ke-n')||{}).value||'',sent:sent?Date.now():0};qs.forEach(function(q){var nr=q.getAttribute('data-nr');d.s[nr]=sel(q).map(function(o){return o.getAttribute('data-k')||(o.hasAttribute('data-anders')?'X':'S');});if(anders(q))d.x[nr]=anders(q);});localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}}
+function store(){try{var d={s:{},x:{},n:(root.querySelector('.ke-n')||{}).value||'',ueb:ueb};qs.forEach(function(q){var nr=q.getAttribute('data-nr');d.s[nr]=sel(q).map(function(o){return o.getAttribute('data-k')||(o.hasAttribute('data-anders')?'X':'S');});if(anders(q))d.x[nr]=anders(q);});localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}}
 function upd(){var n=0,items=[];qs.forEach(function(q){var s=sel(q),w=q.querySelector('.ke-w');q.classList.toggle('ke-done',s.length>0);if(s.length)n++;if(w)w.textContent=s.length?'Deine Wahl: '+wahl(q):'';items.push('<li><b>'+q.getAttribute('data-nr')+' '+esc(q.getAttribute('data-kurz'))+':</b> '+(s.length?esc(s.map(function(o){return label(q,o);}).join(' + ')):'noch offen')+'</li>');});if(z)z.textContent=n+' von '+qs.length+' gewählt';if(sumL)sumL.innerHTML=items.join('');}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-function lock(){sent=true;if(btn){btn.disabled=true;btn.textContent='Gesendet';}each(root.querySelectorAll('.ke-o,.ke-x,.ke-n'),function(e){e.disabled=true;});}
-function restore(){try{var d=JSON.parse(localStorage.getItem(KEY)||'null');if(!d)return;qs.forEach(function(q){var nr=q.getAttribute('data-nr'),ks=d.s&&d.s[nr];if(!ks)return;each(q.querySelectorAll('.ke-o'),function(o){var k=o.getAttribute('data-k')||(o.hasAttribute('data-anders')?'X':'S');o.setAttribute('aria-pressed',ks.indexOf(k)>=0?'true':'false');});var x=q.querySelector('.ke-x');if(x&&d.x&&d.x[nr]){x.value=d.x[nr];x.hidden=false;}});var nn=root.querySelector('.ke-n');if(nn&&d.n)nn.value=d.n;if(d.sent){lock();if(sentEl)sentEl.textContent='Gesendet um '+new Date(d.sent).toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})+'. Deine Auswahl steht unten.';}}catch(e){}}
+function zeit(t){return new Date(t).toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'});}
+function kopierweg(text,status){var out=root.querySelector('.ke-out');if(out){out.hidden=false;out.value=text;if(!cp){cp=document.createElement('button');cp.type='button';cp.className='ke-cp';out.parentNode.insertBefore(cp,out.nextSibling);cp.addEventListener('click',function(){var t=out.value;function zeig(){out.focus();out.select();cp.textContent='Markiert, mit Cmd+C kopieren';}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){cp.textContent='Kopiert, im Chat einfügen';},zeig);else zeig();});}cp.hidden=false;cp.textContent='Text kopieren';}if(sentEl)sentEl.textContent=status;}
+function uebergeben(t){ueb=t;if(btn){btn.disabled=false;btn.textContent='Erneut übergeben';}freeze(false);var r=nachricht();if(r.text)kopierweg(r.text,'An den Chat übergeben um '+zeit(t)+'. '+HINW);}
+function restore(){try{var d=JSON.parse(localStorage.getItem(KEY)||'null');if(!d)return;qs.forEach(function(q){var nr=q.getAttribute('data-nr'),ks=d.s&&d.s[nr];if(!ks)return;each(q.querySelectorAll('.ke-o'),function(o){var k=o.getAttribute('data-k')||(o.hasAttribute('data-anders')?'X':'S');o.setAttribute('aria-pressed',ks.indexOf(k)>=0?'true':'false');});var x=q.querySelector('.ke-x');if(x&&d.x&&d.x[nr]){x.value=d.x[nr];x.hidden=false;}});var nn=root.querySelector('.ke-n');if(nn&&d.n)nn.value=d.n;if(d.ueb||d.sent)uebergeben(d.ueb||d.sent);}catch(e){}}
 qs.forEach(function(q){
 var multi=q.getAttribute('data-multi')==='1',x=q.querySelector('.ke-x');
 each(q.querySelectorAll('.ke-o'),function(o){o.addEventListener('click',function(){
-if(sent)return;
 if(multi){o.setAttribute('aria-pressed',o.getAttribute('aria-pressed')==='true'?'false':'true');}
 else{each(q.querySelectorAll('.ke-o'),function(b){b.setAttribute('aria-pressed',b===o?'true':'false');});}
 if(x){var a=q.querySelector('.ke-o[data-anders][aria-pressed="true"]');x.hidden=!a;if(a)x.focus();}
@@ -40,29 +41,29 @@ if(o.hasAttribute('data-spaeter'))return 'später';
 return o.getAttribute('data-k')+' · '+o.getAttribute('data-t');});
 lines.push(nr+' '+q.getAttribute('data-kurz')+': '+parts.join(' + '));});
 return {lines:lines,miss:miss,leer:leer};}
+function nachricht(){var r=collect();if(r.miss.length||r.leer.length)return r;var n=root.querySelector('.ke-n');if(n&&n.value.trim())r.lines.push('Notiz: '+n.value.trim().replace(/\s*\n\s*/g,' / '));r.text='Klick-Entscheide «'+root.getAttribute('data-titel')+'»\n'+r.lines.join('\n');return r;}
 if(btn)btn.addEventListener('click',function(){
-if(sent)return;
-var r=collect();
+var r=nachricht();
 if(r.miss.length){say('Noch ohne Wahl: '+r.miss.join(', ')+'. Sonst «Später» wählen.');return;}
 if(r.leer.length){say('Bei '+r.leer.join(', ')+' fehlt der Text zu «Anders».');return;}
-var n=root.querySelector('.ke-n');if(n&&n.value.trim())r.lines.push('Notiz: '+n.value.trim().replace(/\s*\n\s*/g,' / '));
-var text='Klick-Entscheide «'+root.getAttribute('data-titel')+'»\n'+r.lines.join('\n');
+var text=r.text;
 var claudeSend=typeof sendPrompt==='function';
 var codexSend=!claudeSend&&window.openai&&typeof window.openai.sendFollowUpMessage==='function';
 if(claudeSend||codexSend){
-btn.disabled=true;freeze(true);
+btn.disabled=true;freeze(true);say('');
 var result;
+function fail(){btn.disabled=false;freeze(false);if(claudeSend)btn.textContent='Entscheide senden';say('Nicht gesendet. Bitte erneut versuchen.');if(claudeSend)kopierweg(text,'Nicht gesendet. Hier kopieren und im Chat einfügen.');}
 try{result=claudeSend?sendPrompt(text):window.openai.sendFollowUpMessage({prompt:text,title:'Entscheide senden'});}
-catch(e){btn.disabled=false;freeze(false);say('Nicht gesendet. Bitte erneut versuchen.');return;}
-Promise.resolve(result).then(function(){
+catch(e){fail();return;}
+Promise.resolve(result).then(function(v){
+if(claudeSend&&v&&v.isError===true){fail();return;}
 if(codexSend){
 btn.disabled=false;freeze(false);btn.textContent='Auswahl erneut übergeben';
 if(sentEl)sentEl.textContent='Bestätigung angefragt. Versand noch nicht bestätigt.';
 store();return;
 }
-lock();store();
-if(sentEl)sentEl.textContent='Gesendet um '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})+'. Deine Auswahl steht unten.';
-},function(){btn.disabled=false;freeze(false);say('Nicht gesendet. Bitte erneut versuchen.');});
+uebergeben(Date.now());store();
+},fail);
 return;
 }
 var out=root.querySelector('.ke-out');if(out){out.hidden=false;out.value=text;}
