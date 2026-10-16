@@ -39,3 +39,93 @@
 .ke-cp{font:inherit;font-size:13px;cursor:pointer;margin-top:6px;padding:6px 12px;border-radius:var(--radius,8px);border:.5px solid var(--border-strong,var(--input,rgba(0,0,0,.22)));background:transparent;color:var(--text-primary,var(--foreground,#1f1e1d))}
 .ke-cp[hidden]{display:none}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kx-r{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.kx-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 .9rem;font-size:13px}
+.kx-t{color:var(--text-secondary,var(--muted-foreground,#5f5e5a));margin-right:2px}
+.kx-bar label{cursor:pointer;user-select:none;-webkit-user-select:none;line-height:1.4;padding:4px 12px;border-radius:999px;border:.5px solid var(--border-strong,var(--input,rgba(0,0,0,.22)));color:var(--text-secondary,var(--muted-foreground,#5f5e5a))}
+.kx-bar label:hover{border-color:var(--border-stronger,var(--ring,rgba(0,0,0,.4)))}
+.kx-rv:checked~.kx-bar .kx-lv,.kx-rk:checked~.kx-bar .kx-lk,.kx-rs:checked~.kx-bar .kx-ls{background:var(--bg-accent,#e6f1fb);border:1px solid var(--border-accent,#378add);color:var(--text-accent,#0c447c);font-weight:500}
+.kx-rv:focus-visible~.kx-bar .kx-lv,.kx-rk:focus-visible~.kx-bar .kx-lk,.kx-rs:focus-visible~.kx-bar .kx-ls{outline:2px solid var(--border-accent,#378add);outline-offset:2px}
+.kx-sp,.kx-e,.kx-w,.kx-qe,.kx-fs,.kx-film,.kx-fm{display:none}
+.kx-m{display:contents}
+.kx-rk:checked~.ke-sk,.kx-rk:checked~.ke-hint,.kx-rk:checked~.ke-sig,.kx-rk:checked~.ke-kopf,.kx-rk:checked~.ke-q .ke-sk-pop,.kx-rk:checked~.ke-q .ke-viz,.kx-rk:checked~.ke-q .ke-pc,.kx-rk:checked~.ke-q .ke-o:not([aria-pressed="true"]) .ke-s{display:none}
+.kx-rk:checked~.ke-q{padding:10px 14px;margin:0 0 8px}
+.kx-rk:checked~.ke-q .ke-f{font-size:14px}
+.kx-rk:checked~.ke-q .ke-k{font-size:12px;margin-top:2px}
+.kx-rk:checked~.ke-q .ke-os{gap:6px;margin-top:8px}
+.kx-rk:checked~.ke-q .ke-o{flex:0 1 auto;padding:5px 12px;border-radius:999px}
+.kx-rk:checked~.ke-q .ke-l{font-size:13px}
+.kx-rk:checked~.ke-q .ke-w{font-size:12px;margin-top:5px}
+.kx-rk:checked~.ke-g{margin:.9rem 0 .35rem}
+.kx-rs:checked~.ke-hint,.kx-rs:checked~.ke-sig,.kx-rs:checked~.ke-q .ke-pc,.kx-rs:checked~.ke-q .ke-s{display:none}
+.kx-rs:checked~.kx-sp{display:block;font-size:14px;line-height:1.5;margin:0 0 1rem;padding:10px 14px;border-radius:16px;border:2px dashed var(--border-strong,var(--input,rgba(0,0,0,.22)))}
+.kx-rs:checked~.ke-g{font-size:14px;color:var(--text-primary,var(--foreground,#1f1e1d));margin:1.4rem 0 .2rem}
+.kx-rs:checked~.ke-q{position:relative;border-width:2px;border-radius:20px;padding:24px 16px 14px;margin:20px 0 14px;box-shadow:0 3px 0 var(--border,rgba(0,0,0,.12))}
+.kx-rs:checked~.ke-q::before{content:"Runde " attr(data-nr);position:absolute;top:-12px;left:16px;font-size:12px;font-weight:500;line-height:1.5;padding:1px 10px;border-radius:999px;background:var(--surface-2,var(--background,#ffffff));border:2px solid var(--border-strong,var(--input,rgba(0,0,0,.22)))}
+.kx-rs:checked~.ke-q.ke-done::before{content:"\2713  Runde " attr(data-nr);border-color:var(--border-accent,#378add);color:var(--text-accent,#0c447c)}
+.kx-rs:checked~.ke-q .ke-f{font-size:17px;line-height:1.4}
+.kx-rs:checked~.ke-q .kx-qe{display:inline;font-size:22px;margin-right:4px;vertical-align:-2px}
+.kx-rs:checked~.ke-q .kx-fs{display:inline}
+.kx-rs:checked~.ke-q .kx-fs+.kx-fx{display:none}
+.kx-rs:checked~.ke-q .ke-k{display:inline-block;margin-top:8px;padding:6px 12px;border-radius:14px;background:var(--surface-2,var(--background,#ffffff));border:.5px solid var(--border,rgba(0,0,0,.12))}
+.kx-rs:checked~.ke-q .ke-k::before{content:"\1F4AC  "}
+.kx-rs:checked~.ke-q .ke-os{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.kx-rs:checked~.ke-q .ke-os:has(>.ke-o:nth-child(3)){grid-template-columns:repeat(3,minmax(0,1fr))}
+.kx-rs:checked~.ke-q .ke-os:has(>.ke-o:nth-child(4)){grid-template-columns:repeat(4,minmax(0,1fr))}
+.kx-rs:checked~.ke-q .ke-os:has(>.ke-o:nth-child(5)){grid-template-columns:repeat(3,minmax(0,1fr))}
+.kx-rs:checked~.ke-q .ke-o{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center;min-height:108px;padding:14px 10px 10px;border:2px solid var(--border-strong,var(--input,rgba(0,0,0,.22)));border-radius:18px;transition:transform .15s ease}
+.kx-rs:checked~.ke-q .ke-o:hover{transform:translateY(-2px)}
+.kx-rs:checked~.ke-q .ke-o[aria-pressed="true"]{border-width:3px;border-color:var(--border-accent,#378add);transform:translateY(-2px)}
+.kx-rs:checked~.ke-q .kx-e{display:block;font-size:34px;line-height:1.15}
+.kx-rs:checked~.ke-q .ke-o[aria-pressed="true"] .kx-e{animation:kx-hop .6s ease}
+.kx-rs:checked~.ke-q .kx-w{display:block;font-size:15px;font-weight:500;line-height:1.25}
+.kx-rs:checked~.ke-q .kx-w+.ke-l{font-size:12px;font-weight:400;opacity:.8;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.kx-rs:checked~.ke-q .ke-o[aria-pressed="true"] .kx-w+.ke-l{-webkit-line-clamp:8;opacity:1}
+.kx-rs:checked~.ke-q .ke-o[data-rec]::after{content:"\2B50  Tipp";position:absolute;top:-11px;right:10px;font-size:11px;font-weight:500;line-height:1.5;padding:0 8px;border-radius:999px;background:var(--surface-2,var(--background,#ffffff));border:1.5px solid var(--border-accent,#378add);color:var(--text-accent,#0c447c)}
+.kx-rs:checked~.ke-q .kx-m{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;grid-column:1/-1}
+.kx-rs:checked~.ke-q .ke-o.ke-mini{flex-direction:row;gap:6px;min-height:0;padding:5px 14px;border-width:1.5px;border-radius:999px}
+.kx-rs:checked~.ke-q .ke-mini .kx-e{display:inline;font-size:15px}
+.kx-rs:checked~.ke-q .kx-film{display:block;position:relative;margin-top:14px;padding:10px 12px 14px;border-radius:16px;border:1.5px dashed var(--border-strong,var(--input,rgba(0,0,0,.22)))}
+.kx-film::before{content:"\1F3AC  Nach dem Senden passiert das";display:block;font-size:12px;font-weight:500;color:var(--text-secondary,var(--muted-foreground,#5f5e5a));margin:0 0 8px}
+.kx-re{position:absolute;top:8px;right:10px;cursor:pointer;user-select:none;-webkit-user-select:none;font-size:12px;color:var(--text-secondary,var(--muted-foreground,#5f5e5a));padding:1px 6px;border-radius:6px}
+.kx-re::after{content:"\1F501  nochmal"}
+.kx-re:hover{color:var(--text-primary,var(--foreground,#1f1e1d))}
+.kx-re input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.kx-re:focus-within{outline:2px solid var(--border-accent,#378add);outline-offset:1px}
+.ke-q:has(.ke-o[data-k="A"][aria-pressed="true"]) .kx-fm[data-k="A"],.ke-q:has(.ke-o[data-k="B"][aria-pressed="true"]) .kx-fm[data-k="B"],.ke-q:has(.ke-o[data-k="C"][aria-pressed="true"]) .kx-fm[data-k="C"],.ke-q:has(.ke-o[data-k="D"][aria-pressed="true"]) .kx-fm[data-k="D"],.ke-q:has(.ke-o[data-k="E"][aria-pressed="true"]) .kx-fm[data-k="E"],.ke-q:has(.ke-o[data-k="F"][aria-pressed="true"]) .kx-fm[data-k="F"],.ke-q:has(.ke-o[data-anders][aria-pressed="true"]) .kx-fm[data-k="X"],.ke-q:has(.ke-o[data-spaeter][aria-pressed="true"]) .kx-fm[data-k="S"]{display:block}
+.ke-q[data-multi="1"] .kx-fm[data-k]:not([data-k="X"]):not([data-k="S"])::before{content:"Option " attr(data-k);display:block;font-size:12px;font-weight:500;margin:6px 0}
+.kx-fm ol{list-style:none;margin:0;padding:0;display:flex;align-items:stretch;gap:28px}
+.kx-fm li{position:relative;flex:1 1 0;min-width:0;text-align:center;padding:8px 6px;border-radius:14px;border:1.5px solid var(--border,rgba(0,0,0,.12));background:var(--surface-1,var(--card,#faf9f5));opacity:0;animation:kx-pop .5s cubic-bezier(.34,1.56,.64,1) forwards;animation-delay:calc(var(--i,0)*.7s)}
+.kx-fm li:nth-child(2){--i:1}
+.kx-fm li:nth-child(3){--i:2}
+.kx-fm li:nth-child(4){--i:3}
+.kx-fm li b{display:block;font-size:28px;line-height:1.2;font-weight:400}
+.kx-fm li span{display:block;font-size:12.5px;line-height:1.35;overflow-wrap:anywhere}
+.kx-fm li:not(:last-child)::after{content:"\279C";position:absolute;top:50%;right:-22px;margin-top:-10px;font-size:17px;line-height:1;color:var(--text-secondary,var(--muted-foreground,#5f5e5a))}
+.kx-fm[data-st="gut"] li:last-child{border-color:#30a46c;background:rgba(48,164,108,.14);animation:kx-pop .5s cubic-bezier(.34,1.56,.64,1) forwards,kx-glow 1.2s ease-out 1;animation-delay:calc(var(--i,0)*.7s),calc(var(--i,0)*.7s + .45s)}
+.kx-fm[data-st="riskant"] li:last-child{border-color:#e5484d;background:rgba(229,72,77,.12);animation:kx-pop .5s cubic-bezier(.34,1.56,.64,1) forwards,kx-shake .5s ease-in-out 1;animation-delay:calc(var(--i,0)*.7s),calc(var(--i,0)*.7s + .5s)}
+.kx-fm[data-st] li:last-child::before{position:absolute;top:-12px;right:-6px;font-size:18px;line-height:1;opacity:0;animation:kx-spark 1.4s ease-out forwards;animation-delay:calc(var(--i,0)*.7s + .45s)}
+.kx-fm[data-st="gut"] li:last-child::before{content:"\2728"}
+.kx-fm[data-st="riskant"] li:last-child::before{content:"\26A0\FE0F"}
+.kx-fm[data-k="X"]::before,.kx-fm[data-k="S"]::before{display:block;text-align:center;font-size:13px;line-height:1.5;padding:8px 10px;border-radius:14px;border:1.5px solid var(--border,rgba(0,0,0,.12));background:var(--surface-1,var(--card,#faf9f5));animation:kx-pop .5s cubic-bezier(.34,1.56,.64,1) both}
+.kx-fm[data-k="X"]::before{content:"\1F680  Du schickst ab   \279C   \270F\FE0F  Dein Wunsch   \279C   \1F50D  Ich pr\FC fe den Umfang"}
+.kx-fm[data-k="S"]::before{content:"\1F680  Du schickst ab   \279C   \1F17F\FE0F  Bleibt offen   \279C   \1F4D2  Kommt auf die Liste"}
+.ke-q:has(.kx-rc:checked) .kx-fm li,.ke-q:has(.kx-rc:checked) .kx-fm[data-k="X"]::before,.ke-q:has(.kx-rc:checked) .kx-fm[data-k="S"]::before{animation-name:kx-pop2}
+.ke-q:has(.kx-rc:checked) .kx-fm[data-st="gut"] li:last-child{animation-name:kx-pop2,kx-glow2}
+.ke-q:has(.kx-rc:checked) .kx-fm[data-st="riskant"] li:last-child{animation-name:kx-pop2,kx-shake2}
+.ke-q:has(.kx-rc:checked) .kx-fm[data-st] li:last-child::before{animation-name:kx-spark2}
+.kx-rs:checked~.ke-foot .ke-send{border-radius:999px;padding:12px 22px;font-size:16px}
+.kx-rs:checked~.ke-foot .ke-send::before{content:"\1F680  "}
+.kx-rs:checked~.ke-foot .ke-z::before{content:"\2B50  "}
+@keyframes kx-pop{0%{opacity:0;transform:translateY(12px) scale(.6)}70%{opacity:1;transform:translateY(-3px) scale(1.05)}100%{opacity:1;transform:none}}
+@keyframes kx-pop2{0%{opacity:0;transform:translateY(12px) scale(.6)}70%{opacity:1;transform:translateY(-3px) scale(1.05)}100%{opacity:1;transform:none}}
+@keyframes kx-hop{0%,100%{transform:none}35%{transform:translateY(-7px) rotate(-8deg)}70%{transform:translateY(0) rotate(5deg)}}
+@keyframes kx-glow{0%{box-shadow:0 0 0 0 rgba(48,164,108,.55)}100%{box-shadow:0 0 0 14px rgba(48,164,108,0)}}
+@keyframes kx-glow2{0%{box-shadow:0 0 0 0 rgba(48,164,108,.55)}100%{box-shadow:0 0 0 14px rgba(48,164,108,0)}}
+@keyframes kx-shake{0%,100%{transform:none}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+@keyframes kx-shake2{0%,100%{transform:none}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+@keyframes kx-spark{0%{opacity:0;transform:translateY(6px) scale(.4)}40%{opacity:1;transform:translateY(-6px) scale(1.3)}100%{opacity:1;transform:none}}
+@keyframes kx-spark2{0%{opacity:0;transform:translateY(6px) scale(.4)}40%{opacity:1;transform:translateY(-6px) scale(1.3)}100%{opacity:1;transform:none}}
+@media (max-width:440px){.kx-fm ol{flex-direction:column;gap:22px}.kx-fm li:not(:last-child)::after{content:"\2193";top:auto;right:auto;bottom:-20px;left:50%;margin:0 0 0 -5px}.kx-rs:checked~.ke-q .ke-os,.kx-rs:checked~.ke-q .ke-os:has(>.ke-o:nth-child(n)){grid-template-columns:repeat(2,minmax(0,1fr))}.kx-rs:checked~.ke-foot .ke-send{padding:10px 16px;font-size:15px}}
+@media (prefers-reduced-motion:reduce){.kx-fm li,.kx-fm li::before,.kx-fm::before,.kx-e{animation:none!important}.kx-fm li,.kx-fm li::before{opacity:1!important}.kx-rs:checked~.ke-q .ke-o,.kx-rs:checked~.ke-q .ke-o:hover,.kx-rs:checked~.ke-q .ke-o[aria-pressed="true"]{transition:none;transform:none}}
+@supports not selector(:has(a)){.kx-rs:checked~.ke-q .kx-fm{display:block}.kx-rs:checked~.ke-q .kx-fm[data-k]:not([data-k="X"]):not([data-k="S"])::before{content:"Option " attr(data-k);display:block;font-size:12px;font-weight:500;margin:6px 0}.kx-re{display:none}}
