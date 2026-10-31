@@ -1,4 +1,3 @@
-@font-face{font-family:Virgil;src:url(https://cdn.jsdelivr.net/npm/@excalidraw/excalidraw@0.17.6/dist/excalidraw-assets/Virgil.woff2) format("woff2");font-display:swap}
 .ke{color:var(--text-primary,var(--foreground,#1f1e1d));padding:.5rem 0 1rem}
 .ke-sk{margin:0 0 1.1rem}
 .ke-svg{display:block;width:100%;color:var(--text-primary,var(--foreground,#1f1e1d));overflow:visible}

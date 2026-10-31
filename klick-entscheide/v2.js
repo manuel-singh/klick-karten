@@ -1,5 +1,5 @@
 (()=>{
-let HAND='Virgil, Kalam, "Chalkboard SE", "Comic Sans MS", cursive',LH=1.25,NS='http://www.w3.org/2000/svg',D=document,W=window,{min,max,round,floor,ceil,cos,sin,atan2}=Math,cv;
+let HAND='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',LH=1.25,NS='http://www.w3.org/2000/svg',D=document,W=window,{min,max,round,floor,ceil,cos,sin,atan2}=Math,cv;
 let PAL={blau:[165,216,255],gelb:[255,236,153],gruen:[178,242,187],rot:[255,168,168],lila:[208,191,255],grau:[222,226,230]};
 let MK={rot:['#e5484d','#b4232a','#ff9b9b','#b4232a','#fff'],gelb:['#e0a800','#7d5a00','#ffd666','#e0a800','#1f1e1d'],gruen:['#30a46c','#1a7046','#7ee2a8','#1a7046','#fff'],blau:['#378add','#1f5fa8','#9cc9ff','#1f5fa8','#fff']};
 let MARKE={neu:['gruen','NEU'],geaendert:['gelb','GEÄNDERT'],weg:['rot','WEG']};
@@ -19,7 +19,7 @@ let halo=()=>dark()?'rgba(31,30,29,.95)':'rgba(255,255,255,.95)';
 let pen=(svg,seed)=>{
 let o={stroke:'currentColor',strokeWidth:1.5,roughness:1.1,bowing:.9,seed},put=n=>AP(svg,n);
 let el=(t,a,x)=>{a.stroke=x.stroke;a['stroke-width']=x.strokeWidth;if(x.strokeLineDash)a['stroke-dasharray']=x.strokeLineDash.join(' ');return mk(t,a);};
-let rc=W.rough?.svg?W.rough.svg(svg):{path:(d,x)=>el('path',{d,fill:x.fill||'none'},x),line:(x1,y1,x2,y2,x)=>el('line',{x1,y1,x2,y2},x),circle:(cx,cy,d,x)=>el('circle',{cx,cy,r:d/2,fill:x.fill||'none'},x),curve:(p,x)=>el('polyline',{points:p.map(q=>q.join(',')).join(' '),fill:'none'},x)};
+let rc={path:(d,x)=>el('path',{d,fill:x.fill||'none'},x),line:(x1,y1,x2,y2,x)=>el('line',{x1,y1,x2,y2},x),circle:(cx,cy,d,x)=>el('circle',{cx,cy,r:d/2,fill:x.fill||'none'},x),curve:(p,x)=>el('polyline',{points:p.map(q=>q.join(',')).join(' '),fill:'none'},x)};
 let opt=(f,x)=>{let r=Object.assign({},o,x),fl=fillOf(f);if(fl!='none'){r.fill=fl;r.fillStyle='solid';}return r;};
 let rr=(x,y,w,h,r)=>{r=max(0,min(r,h/2,w/2));let X=x+w,Y=y+h;return `M${x+r} ${y}L${X-r} ${y}Q${X} ${y} ${X} ${y+r}L${X} ${Y-r}Q${X} ${Y} ${X-r} ${Y}L${x+r} ${Y}Q${x} ${Y} ${x} ${Y-r}L${x} ${y+r}Q${x} ${y} ${x+r} ${y}Z`;};
 let P={
@@ -104,7 +104,7 @@ let alles=force=>{mus.forEach((mu,i)=>zeichneMu(mu,i,force));bxs.forEach(overlay
 alles(true);
 bxs.forEach((bx,j)=>{let md=Q(bx,'img,video'),neu=()=>overlay(bx,j);if(!md)return;ON(md,'load',neu);ON(md,'loadedmetadata',neu);if(md.tagName!='VIDEO')return;ON(md,'loadeddata',neu);ON(md,'play',()=>KL(bx,'ke2-spielt',true));['pause','ended'].forEach(n=>ON(md,n,()=>{KL(bx,'ke2-spielt',false);neu();}));});
 if(!(W.rough?.svg))QA(D,'script[src*="roughjs"]').forEach(s=>ON(s,'load',()=>alles(true)));
-D.fonts.load('18px Virgil').then(()=>alles(true),()=>{});
+D.fonts.ready.then(()=>alles(true),()=>{});
 let ro=new ResizeObserver(es=>es.forEach(en=>{let el=en.target;requestAnimationFrame(()=>{let i=mus.indexOf(el),j=bxs.indexOf(el);if(i>=0)zeichneMu(el,i,false);if(j>=0)overlay(el,j);});}));mus.concat(bxs).forEach(el=>ro.observe(el));
 W.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>alles(true));
 };

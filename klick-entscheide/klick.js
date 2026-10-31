@@ -1,6 +1,6 @@
 (function(){
 function init(root){
-var HAND='Virgil, Kalam, "Chalkboard SE", "Comic Sans MS", cursive',LH=1.25,NS='http://www.w3.org/2000/svg';
+var HAND='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',LH=1.25,NS='http://www.w3.org/2000/svg';
 var PAL={blau:[165,216,255],gelb:[255,236,153],gruen:[178,242,187],rot:[255,168,168],lila:[208,191,255],grau:[222,226,230]};
 var qs=[].slice.call(root.querySelectorAll('.ke-q')),btn=root.querySelector('.ke-send'),z=root.querySelector('.ke-z'),err=root.querySelector('.ke-err'),sumL=root.querySelector('.ke-sum ol'),sentEl=root.querySelector('.ke-sent'),ueb=0,cp=null;
 var KEY='ke:'+(root.getAttribute('data-titel')||'');
@@ -82,7 +82,7 @@ function dark(){var m=(getComputedStyle(root).color||'').match(/\d+(\.\d+)?/g);r
 function fillOf(f){if(!f||f==='keine')return 'none';var p=PAL[f]||PAL.grau;return 'rgba('+p[0]+','+p[1]+','+p[2]+','+(dark()?0.28:0.9)+')';}
 function mk(tag,a){var e=document.createElementNS(NS,tag);for(var k in a)e.setAttribute(k,a[k]);return e;}
 function pen(svg,seed){
-var rc=window.rough&&window.rough.svg?window.rough.svg(svg):null,o={stroke:'currentColor',strokeWidth:1.5,roughness:1.1,bowing:0.9,seed:seed};
+var rc=null,o={stroke:'currentColor',strokeWidth:1.5,roughness:1.1,bowing:0.9,seed:seed};
 function put(n){svg.appendChild(n);return n;}
 function opt(f){var r={},k;for(k in o)r[k]=o[k];var fl=fillOf(f);if(fl!=='none'){r.fill=fl;r.fillStyle='solid';}return r;}
 function rr(x,y,w,h){var r=Math.min(14,h/4,w/4);return 'M'+(x+r)+' '+y+'L'+(x+w-r)+' '+y+'Q'+(x+w)+' '+y+' '+(x+w)+' '+(y+r)+'L'+(x+w)+' '+(y+h-r)+'Q'+(x+w)+' '+(y+h)+' '+(x+w-r)+' '+(y+h)+'L'+(x+r)+' '+(y+h)+'Q'+x+' '+(y+h)+' '+x+' '+(y+h-r)+'L'+x+' '+(y+r)+'Q'+x+' '+y+' '+(x+r)+' '+y+'Z';}
@@ -133,7 +133,7 @@ try{var s=JSON.parse(sk.getAttribute('data-spec')),f=LAY[s.typ],H=f?Math.ceil(f(
 catch(e){svg.setAttribute('height','0');var c=sk.querySelector('.ke-cap');if(c)c.textContent='Skizze nicht darstellbar: '+e.message;}});}
 draw(true);
 if(!(window.rough&&window.rough.svg))each(document.querySelectorAll('script[src*="roughjs"]'),function(s){s.addEventListener('load',function(){draw(true);});});
-if(document.fonts&&document.fonts.load)document.fonts.load('18px Virgil').then(function(){draw(true);},function(){});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){draw(true);},function(){});
 if(window.ResizeObserver)new ResizeObserver(function(){draw(false);}).observe(root);
 }
 function start(){[].forEach.call(document.querySelectorAll('.ke[data-titel]'),function(r){if(r.getAttribute('data-ke-on'))return;r.setAttribute('data-ke-on','1');try{init(r);}catch(e){if(window.console)console.error(e);}});}

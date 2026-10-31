@@ -16,7 +16,7 @@
 .ke-v2 .ke2-st .kx-film::before{padding-right:84px}
 .ke-v2 .ke2-st .ke-sk,.ke-v2 .ke2-mu{margin:6px 0 12px;min-width:0}
 .ke2-svg{display:block;max-width:100%;overflow:visible}
-.ke2-skt{font-family:Virgil,Kalam,"Chalkboard SE","Comic Sans MS",cursive;font-size:18px;line-height:1.25;margin:0 0 6px}
+.ke2-skt{font-family:system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;font-size:18px;line-height:1.25;margin:0 0 6px}
 .ke2-ehr{font-weight:500}
 .ke2-fehler{color:var(--text-danger,var(--destructive,#a32d2d))}
 .ke2-med{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 6px;min-width:0}
