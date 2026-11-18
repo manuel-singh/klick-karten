@@ -41,7 +41,7 @@ if(o.hasAttribute('data-spaeter'))return 'später';
 return o.getAttribute('data-k')+' · '+o.getAttribute('data-t');});
 lines.push(nr+' '+q.getAttribute('data-kurz')+': '+parts.join(' + '));});
 return {lines:lines,miss:miss,leer:leer};}
-function nachricht(){var r=collect();if(r.miss.length||r.leer.length)return r;var n=root.querySelector('.ke-n');if(n&&n.value.trim())r.lines.push('Notiz: '+n.value.trim().replace(/\s*\n\s*/g,' / '));r.text='Klick-Entscheide «'+root.getAttribute('data-titel')+'»\n'+r.lines.join('\n');return r;}
+function nachricht(){var r=collect();if(r.miss.length||r.leer.length)return r;var n=root.querySelector('.ke-n');if(n&&n.value.trim())r.lines.push('Notiz: '+n.value.trim().replace(/\s*\n\s*/g,' / '));var k=root.getAttribute('data-karte')||'',z=(root.getAttribute('data-bau')||'').slice(11,16),kopf='';if(/^K-[0-9A-Za-z]{2,12}$/.test(k))kopf=' · '+k+(/^\d\d:\d\d$/.test(z)?' · '+z:'');r.text='Klick-Entscheide «'+root.getAttribute('data-titel')+'»'+kopf+'\n'+r.lines.join('\n');return r;}
 if(btn)btn.addEventListener('click',function(){
 var r=nachricht();
 if(r.miss.length){say('Noch ohne Wahl: '+r.miss.join(', ')+'. Sonst «Später» wählen.');return;}
